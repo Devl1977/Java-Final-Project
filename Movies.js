@@ -1,4 +1,3 @@
-// basically using the one from the flags project i used it here.  But we need to do this 3 times?
 // maybe there is a way to do this all in one function where i can do specific searches for popular, upcoming and top rated? looking throug notes and searching
 // Based on project constraints we're not getting into any other API sections so just going to focus on popular, upcoming and top rated.
 // Because i want to make sure that I can maximize my grade and time spent on perfecting this and trying to get a decent grade
