@@ -3,6 +3,22 @@
 // Because i want to make sure that I can maximize my grade and time spent on perfecting this and trying to get a decent grade
 // genres absolutely drove me crazy.  i spent the bulk of my hours working on figureing out how this works but i needed two different calls and to match up the ID's between arrays.
 
+
+// adding to the search input section to make it more interractive
+const searchInput = document.getElementById("searchInput");
+const suggestionsContainer = document.getElementById("suggestions");
+
+// Listen for input events to trigger search suggestions
+searchInput.addEventListener("input", async function() {
+  const query = searchInput.value.trim();
+  if (query.length > 2) {
+    const suggestions = await fetchSearchSuggestions(query);
+    displaySuggestions(suggestions);
+  } else {
+    suggestionsContainer.style.display = "none";
+  }
+});
+
 async function fetchGenres() {
   try 
   {
@@ -26,6 +42,50 @@ async function fetchGenres() {
       console.log(error);
   }  
 }
+
+// section for seearch suggestions (interractive search basically)
+async function fetchSearchSuggestions(query) {
+  const API_KEY = '8ea5d7168687526a85589a1b60fadec2';
+  const SEARCH_API_URL = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${query}&language=en-US&page=1`;
+  
+  try {
+    const response = await fetch(SEARCH_API_URL);
+    if (response.ok) {
+      const data = await response.json();
+      return data.results;
+    } else {
+      console.error("Failed to fetch suggestions");
+      return [];
+    }
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    return [];
+  }
+}
+
+function displaySuggestions(suggestions) {
+  suggestionsContainer.innerHTML = ""; // Clear previous suggestions
+  suggestionsContainer.style.display = "block";
+
+  suggestions.forEach(item => {
+    const suggestionItem = document.createElement("div");
+    suggestionItem.classList.add("suggestion-item");
+    suggestionItem.textContent = item.title || item.name;
+    suggestionItem.addEventListener("click", () => {
+      searchInput.value = item.title || item.name;
+      suggestionsContainer.style.display = "none";
+    });
+    suggestionsContainer.appendChild(suggestionItem);
+  });
+
+  if (suggestions.length === 0) {
+    const noResultsItem = document.createElement("div");
+    noResultsItem.classList.add("suggestion-item");
+    noResultsItem.textContent = "No results found";
+    suggestionsContainer.appendChild(noResultsItem);
+  }
+}
+
 // I found out how to do a function for multiple "Types" for popular, top rated and upcoming....
 async function fetchData(type) {
     try 
