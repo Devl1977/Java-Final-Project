@@ -21,10 +21,11 @@
         <li ><a href="#More">More</a></li> 
         
 
-        <li style="float:right"><a href="#Join">Join TMDB</a></li>
+        <li style="float:right"><a href="#Profile">Profile</a></li>
         <li style="float:right"><a href="#Login">Login</a></li>
         <li style="float:right"><a href="#Language">EN</a></li>
         <li style="float:right"><a href="#">+</a></li> 
+        <li style="float:right"><a href="#watchlist" id="watchlistButton">Watchlist</a></li>
       </ul>
     </div>
 
@@ -35,8 +36,8 @@
       <h1>Millions of movies, TV shows and people to discover.  Explore now.</h1>
       <br><br>
       <div class="input-container">
-        <input type="text" class="search" placeholder="Looking for a movie?">
-        <button id="searchButton">Search</button>
+        <input type="text" class="search" id="searchInput" placeholder="Looking for a movie?">
+        <button id="searchButton" onclick="searchMovie()">Search</button>
         <div id="suggestions" class="suggestions-container"></div>
       </div>
     </div>
