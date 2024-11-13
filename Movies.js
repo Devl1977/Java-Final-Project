@@ -66,11 +66,12 @@ function getMatchingGenre(genre_id_array, all_genres) {
 }
 
 const bannerElement = document.getElementById("banner");
-function changeBackgroundImage(event){
-  
-  const paragraphElement = event.target
-  console.log(paragraphElement.getAttribute('data-url'))
-  bannerElement.style.backgroundImage = `url(${paragraphElement.getAttribute('data-url')})`
+
+function changeBackgroundImage(event) {
+  const paragraphElement = event.target;
+  const highResImageUrl = paragraphElement.getAttribute('data-url').replace("w220_and_h330_face", "w780");
+  console.log("New Banner Image URL:", highResImageUrl); // Check the new URL
+  bannerElement.style.backgroundImage = `url(${highResImageUrl})`;
 }
 
 function displayMovies(movies, type, genres_array = [], showWatchlistControls = true) {
